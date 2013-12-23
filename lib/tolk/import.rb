@@ -15,6 +15,7 @@ module Tolk
             l.match(/(.*\.){2,}/) # reject files of type xxx.en.yml
         }
         locales = locales.reject(&locale_block_filter).map {|x| x.split('.').first }
+        locales = locales - ["routes"] # reject translated routes
         locales = locales - [Tolk::Locale.primary_locale.name]
         locales.each {|l| import_locale(l) }
       end
